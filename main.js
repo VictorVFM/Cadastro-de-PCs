@@ -3,24 +3,24 @@
 const openModal = () => document.getElementById('modal')
     .classList.add('active')
 
-    const closeModal = () => {
-        clearFields()
-        document.getElementById('modal').classList.remove('active')       
-    }
+const closeModal = () => {
+    clearFields()
+    document.getElementById('modal').classList.remove('active')
+}
 
 
 const getLocalStorage = () => JSON.parse(localStorage.getItem('db_computer')) ?? []
 const setLocalStorage = (dbComputer) => localStorage.setItem("db_computer", JSON.stringify(dbComputer))
 
 //CRUD- Create read update delete
-const deleteComputer = (index) =>{
+const deleteComputer = (index) => {
     const dbComputer = readComputer()
-    dbComputer.splice(index,1)
+    dbComputer.splice(index, 1)
     setLocalStorage(dbComputer)
 }
 
 
-const updateComputer = (index,computer) => {
+const updateComputer = (index, computer) => {
     const dbComputer = readComputer()
     dbComputer[index] = computer
     setLocalStorage(dbComputer)
@@ -32,12 +32,12 @@ const readComputer = () => getLocalStorage()
 
 const createComputer = (computer) => {
     const dbComputer = getLocalStorage()
-    dbComputer.push (computer)
+    dbComputer.push(computer)
     setLocalStorage(dbComputer)
 }
 
-const isValidFields = () =>{
-  return document.getElementById('form').reportValidity()
+const isValidFields = () => {
+    return document.getElementById('form').reportValidity()
 }
 
 //Intereação com o layout
@@ -49,7 +49,8 @@ const clearFields = () => {
 }
 
 const saveComputer = () => {
-    if(isValidFields()){
+    debugger
+    if (isValidFields()) {
         const computer = {
             localizacao: document.getElementById('local').value,
             andar: document.getElementById('andar').value,
@@ -60,22 +61,24 @@ const saveComputer = () => {
             patrimonio: document.getElementById('patrimonio').value,
             ramal: document.getElementById('ramal').value
         }
-        const index = document.getElementById('local').dataset.index
-        if(index == 'new'){
+        const index = document.getElementById('patrimonio').dataset.index
+        if (index == 'new') {
             createComputer(computer)
             updateTable()
             closeModal()
 
-        }else{
-            updateComputer(index,computer)
-            updateTable()
+        } else {
+            
+             updateComputer(index, computer)
+             updateTable()
             closeModal()
         }
-        
-        
+
+
 
     }
 }
+
 
 const createRow = (computer, index) => {
     const newRow = document.createElement('tr')
@@ -106,7 +109,7 @@ const updateTable = () => {
     dbComputer.forEach(createRow)
 }
 
-const fillFields = (computer) =>{
+const fillFields = (computer) => {
     document.getElementById('local').value = computer.localizacao
     document.getElementById('andar').value = computer.andar
     document.getElementById('setor').value = computer.setor
@@ -115,45 +118,48 @@ const fillFields = (computer) =>{
     document.getElementById('anydesk').value = computer.anydesk
     document.getElementById('patrimonio').value = computer.patrimonio
     document.getElementById('ramal').value = computer.ramal
-    document.getElementById('local').dataset.index = computer.index
+    document.getElementById('patrimonio').dataset.index = computer.index
 }
 
 const editComputer = (index) => {
     const computer = readComputer()[index]
-    computer.index= index
+    computer.index = index
     fillFields(computer)
     openModal()
 }
 
 const editDelete = (event) => {
-    if(event.target.type == 'button'){
-        
-        const [action,index] = event.target.id.split('-')
+    if (event.target.type == 'button') {
 
-        if(action == 'edit'){
+        const [action, index] = event.target.id.split('-')
+
+        if (action == 'edit') {
             editComputer(index)
-        }else{
+        } else {
             const computer = readComputer()[index]
             const response = confirm(`Deseja realmente excluir a maquina ${computer.patrimonio}`)
-            if(response){
-            deleteComputer(index)
-            updateTable()
-            }   
+            if (response) {
+                deleteComputer(index)
+                updateTable()
+            }
         }
     }
 }
 
 updateTable()
 
-    //EVENTOS
+//EVENTOS
 document.getElementById('cadastrarMaquina')
-        .addEventListener('click', openModal)
+    .addEventListener('click', openModal)
 
 document.getElementById('modalClose')
-        .addEventListener('click', closeModal)
+    .addEventListener('click', closeModal)
 
 document.getElementById('salvar')
-        .addEventListener('click',saveComputer)
+    .addEventListener('click', saveComputer)
+
+document.getElementById('cancelar')
+    .addEventListener('click', closeModal)
 
 document.querySelector('#tableComputer>tbody')
-        .addEventListener('click', editDelete)
+    .addEventListener('click', editDelete)

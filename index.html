@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/records.css">
+    <link rel="stylesheet" href="css/modal.css">    
+    <script src="main.js" defer></script>
+    <title>Controle de Ips</title>
+</head>
+
+<body>
+    
+    <header>
+        <h1 class="header-title">Cadastro de IP das Maquinas</h1>
+    </header>
+    <main>
+        <button type="button" class="button blue mobile" id="cadastrarMaquina">Cadastrar Maquina</button>
+        <table id="tableComputer" class="records">
+            <thead>
+                <tr>
+                    <th>Localização</th>
+                    <th>Andar</th>
+                    <th>Setor</th>
+                    <th>Sala</th>                    
+                    <th>IP</th>
+                    <th>Anydesk</th>
+                    <th>Patrimonio</th>
+                    <th>Ramal</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2>Nova Maquina</h2>
+                    <span class="modal-close" id="modalClose">&#10006;</span>
+                </header>
+                <form id="form" class="modal-form">
+                    <input type="local" id="local" data-index="new"class="modal-field" placeholder="Local da Maquina" required>
+                    <input type="andar" id="andar" class="modal-field" placeholder="Andar da Maquina" required>
+                    <input type="setor" id="setor" class="modal-field" placeholder="Setor da Maquina" required>
+                    <input type="sala"  id="sala" class="modal-field" placeholder="Sala da Maquina" required>
+                    <input type="ip" id="ip" class="modal-field" placeholder="IP da Maquina" required>
+                    <input type="anydesk" id="anydesk" class="modal-field" placeholder="Anydesk da Maquina" required>
+                    <input type="patrimonio" id="patrimonio" class="modal-field" placeholder="Patrimonio da Maquina" required>
+                    <input type="ramal" id="ramal" class="modal-field" placeholder="Ramal do Local" required>
+                
+                </form>
+                <footer class="modal-footer">
+                    <button id="salvar" class="button green">Salvar</button>
+                    <button id="cancelar" class="button blue">Cancelar</button>
+                </footer>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer>
+        Copyright &copy; Dev. Victor Hugo Ferreira
+    </footer>
+
+</body>
+
+</html>

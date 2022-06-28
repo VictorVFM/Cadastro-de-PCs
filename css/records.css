@@ -32,6 +32,10 @@
     background-color:var(--secudary-color);
 }
 
+.dataTables_wrapper{
+    width:100% !important;
+}
+
 @media(max-width:480px){
     .records{
         border-spacing: 5px;
